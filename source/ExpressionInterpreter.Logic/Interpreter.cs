@@ -16,17 +16,17 @@ namespace ExpressionInterpreter.Logic
 
         public double OperandLeft
         {
-            get { throw new NotImplementedException(); }
+            get { return _operandLeft; }
         }
 
         public double OperandRight
         {
-            get { throw new NotImplementedException(); }
+            get { return _operandRight; }
         }
 
         public char Op
         {
-            get { throw new NotImplementedException(); }
+            get { return _op; }
         }
 
 
@@ -42,7 +42,23 @@ namespace ExpressionInterpreter.Logic
         /// </summary>
         public double Calculate()
         {
-            throw new NotImplementedException();
+            if (Op == '+')
+            {
+                return OperandLeft + OperandRight;
+            }
+            else if (Op == '-')
+            {
+                return OperandLeft - OperandRight;
+            }
+            else if (Op == '*')
+            {
+                return OperandLeft * OperandRight;
+            }
+            else 
+            {
+
+                return OperandLeft / OperandRight;
+            }
         }
 
         /// <summary>
@@ -57,7 +73,14 @@ namespace ExpressionInterpreter.Logic
         /// </summary>
         public void ParseExpressionStringToFields()
         {
-            throw new NotImplementedException();
+            int pos = 0;
+            SkipBlanks(ref pos);
+            _operandLeft = ScanNumber(ref pos);
+            SkipBlanks(ref pos);
+            _op = ExpressionText[pos];
+            pos++;
+            SkipBlanks(ref pos);
+            _operandRight = ScanNumber(ref pos);
         }
 
         /// <summary>
@@ -68,7 +91,70 @@ namespace ExpressionInterpreter.Logic
         /// <returns></returns>
         private double ScanNumber(ref int pos)
         {
-            throw new NotImplementedException();
+            bool isNegative = false;
+            bool containsComma = false;
+            int comma = 0;
+            double result = 0;
+            double faktor = 1;
+
+            if (ExpressionText[pos] == '-')
+            {
+                isNegative = true;
+                pos++;
+            }
+            while (pos < ExpressionText.Length && 
+                (char.IsDigit(ExpressionText[pos]) || ExpressionText[pos] == ','))
+            {
+                if(ExpressionText[pos] == ',')
+                {
+                    containsComma = true;
+                    comma = pos;
+                }
+                pos++;
+            }
+
+            int endOfNum = pos;
+
+            if (containsComma)
+            {
+                pos = comma - 1;
+
+                while (pos >= 0 && char.IsDigit(ExpressionText[pos]))
+                {
+                    result += ScanInteger(ref pos) * faktor;
+                    faktor *= 10;
+                    pos--;
+                }
+                pos = comma + 1;
+                faktor = 1;
+                while (pos < ExpressionText.Length && char.IsDigit(ExpressionText[pos]))
+                {
+                    faktor /= 10;
+                    result += ScanInteger(ref pos) * faktor;
+                    pos++;
+                }
+            }
+            else
+            {
+                pos = endOfNum - 1;
+                
+                while (pos >= 0 && char.IsDigit(ExpressionText[pos]))
+                {
+                    result += ScanInteger(ref pos) * faktor;
+                    faktor *= 10;
+                    pos--;
+                }
+            }
+            if (isNegative)
+            {
+                result = result * -1;
+            }
+            if (pos != ExpressionText.Length)
+            {
+                pos = endOfNum;
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -78,7 +164,7 @@ namespace ExpressionInterpreter.Logic
         /// <returns></returns>
         private int ScanInteger(ref int pos)
         {
-            throw new NotImplementedException();
+                return ExpressionText[pos] - '0';
         }
 
         /// <summary>
@@ -87,7 +173,10 @@ namespace ExpressionInterpreter.Logic
         /// <param name="pos"></param>
         private void SkipBlanks(ref int pos)
         {
-            throw new NotImplementedException();
+            while (char.IsWhiteSpace(ExpressionText[pos]))
+            {
+                pos++;
+            }
         }
 
         /// <summary>

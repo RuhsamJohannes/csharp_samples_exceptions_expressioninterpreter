@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2050
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionInterpreter.Wpf", "ExpressionInterpreter.Wpf\ExpressionInterpreter.Wpf.csproj", "{DF0BC180-D732-4079-BBFF-1CD692D16047}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionInterpreter.Logic", "ExpressionInterpreter.Logic\ExpressionInterpreter.Logic.csproj", "{6278032E-9CC2-47B7-9F05-5E98690CDE77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpressionInterpreter.Logic", "ExpressionInterpreter.Logic\ExpressionInterpreter.Logic.csproj", "{6278032E-9CC2-47B7-9F05-5E98690CDE77}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionInterpreter.Test", "ExpressionInterpreter.Test\ExpressionInterpreter.Test.csproj", "{C87F48F0-AE12-4B9B-90CD-EAA6EDC25F63}"
 EndProject

@@ -284,6 +284,5 @@ namespace ExpressionInterpreter.Test
             interpreter.Parse(expressionString);
             Assert.AreEqual(" 5,7 / 2,0 ", interpreter.ExpressionText);
         }
-
     }
 }
